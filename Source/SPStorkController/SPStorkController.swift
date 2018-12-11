@@ -32,7 +32,7 @@ public struct SPStorkController {
                         $0.transform = CGAffineTransform(translationX: 0, y: -translation)
                     }
                     if presentationController.pan?.state != UIGestureRecognizer.State.changed {
-                        presentationController.scrollViewDidScroll(translation)
+                        presentationController.scrollViewDidScroll(translation * 2)
                     }
                 } else {
                     presentationController.scrollViewDidScroll(0)
@@ -40,7 +40,19 @@ public struct SPStorkController {
             }
         }
     }
-    
+
+    static public func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
+        if let controller = self.controller(for: scrollView) {
+//            if let presentationController = controller.presentationController as? SPStorkPresentationController {
+                let translation = -(scrollView.contentOffset.y + scrollView.contentInset.top)
+                if translation*2 >= 120 {
+                    print(translation)
+                    controller.dismiss(animated: true)
+                }
+//            }
+        }
+    }
+
     static private func controller(for view: UIView) -> UIViewController? {
         var nextResponder = view.next
         while nextResponder != nil && !(nextResponder! is UIViewController) {
