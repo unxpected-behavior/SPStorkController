@@ -40,7 +40,7 @@ public struct SPStorkController {
             }
         }
     }
-
+    
     static public func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
         if let controller = self.controller(for: scrollView) {
 //            if let presentationController = controller.presentationController as? SPStorkPresentationController {
@@ -53,6 +53,18 @@ public struct SPStorkController {
         }
     }
 
+    static public func updatePresentingController(parent controller: UIViewController) {
+        if let presentationController = controller.presentedViewController?.presentationController as? SPStorkPresentationController {
+            presentationController.updatePresentingController()
+        }
+    }
+    
+    static public func updatePresentingController(modal controller: UIViewController) {
+        if let presentationController = controller.presentationController as? SPStorkPresentationController {
+            presentationController.updatePresentingController()
+        }
+    }
+    
     static private func controller(for view: UIView) -> UIViewController? {
         var nextResponder = view.next
         while nextResponder != nil && !(nextResponder! is UIViewController) {
