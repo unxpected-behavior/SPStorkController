@@ -4,9 +4,9 @@ Modal controller as in mail or Apple music application. Similar animation and tr
 
 Preview GIF loading `3mb`. Please, wait
 
-<img src="https://rawcdn.githack.com/IvanVorobei/SPStorkController/9cde2d114d364c4e09fee28b3fb9976763e034f7/Resources/gif-mockup.gif" width="500">
+<img src="https://rawcdn.githack.com/IvanVorobei/SPStorkController/c66764082c0d9bf11d0bd46d5fa458edb62044fe/Resources/gif-mockup - 3.gif" width="500">
 
-Preview from my app, all other UI not contains in pod. Apple soon appear in AppStore
+You can download example [in AppStore](https://itunes.apple.com/app/id1446635818). If you want buy code of app on gif, please, [contact me](#contact). Source code can be used for educational purposes only
 
 <img src="https://rawcdn.githack.com/IvanVorobei/SPStorkController/4b1c91dacc4d3f901fcab5c7efdff256a40c4381/Resources/SPStorkController - Donate.svg"/>
 
@@ -23,11 +23,6 @@ Drop in `Source/SPStorkController` folder to your Xcode project. Make sure to en
 Or via CocoaPods:
 ```ruby
 pod 'SPStorkController'
-```
-
-and import library in class:
-```swift
-import SPStorkController
 ```
 
 ## How to use
@@ -57,23 +52,28 @@ Please, _not_ init `SPStorkTransitioningDelegate` like here:
 controller.transitioningDelegate = SPStorkTransitioningDelegate()
 ```
 
-You get error about weak property.
+You will get error about weak property.
 
 ### Parametrs
 
-- Parametr `isSwipeToDismissEnabled` enable dissmiss by swipe gester. Defualt is `true`:
+- Parameter `isSwipeToDismissEnabled` enables dissmiss by swipe gester. Defualt is `true`:
 
 ```swift
 transitionDelegate.isSwipeToDismissEnabled = true
 ```
 
-- Parametr `showIndicator` show or hide top arrow indicator. Defualt is `true`:
+- Parameter `showIndicator` shows or hides top arrow indicator. Defualt is `true`:
 ```swift
 transitionDelegate.showIndicator = true
 ```
 
+- Parameter `customHeight` sets custom height for modal controller. Defualt is `nil`:
+```swift
+transitionDelegate.customHeight = 350
+```
+
 ### Add Navigation Bar
-You may want to add a navigation bar to your modal controller. Since it became impossible to change or customize the native controller in swift 4 (I couldn’t even find a way to change the height of bar), I completely create navigation bar. Visually, it looks real, but it doesn’t execute the necessary functions:
+You may want to add a navigation bar to your modal controller. Since it became impossible to change or customize the native controller in swift 4 (I couldn’t even find a way to change the height of bar), I had to completely create navigation bar. Visually, it looks real, but it doesn’t execute the necessary functions:
 
 ```swift
 import UIKit
@@ -116,9 +116,25 @@ func scrollViewDidScroll(_ scrollView: UIScrollView) {
 }
 ```
 
+### Work with UITableView & UICollectionView
+
+Working with a collections classes is not difficult. In the `Example` folder you can find the implementation, however I will give a couple of tips to help the table look better.
+
+For fist, if you use `SPFakeBarView`, don't forget set top insets for content & scroll indicator. Also I am recomeded set bottom insets:
+
+```swift
+tableView.contentInset.top = self.navBar.height
+tableView.scrollIndicatorInsets.top = self.navBar.height
+
+tableView.contentInset.bottom = self.safeArea.bottom
+tableView.scrollIndicatorInsets.bottom = self.safeArea.bottom
+```
+
+Please, use also `SPStorkController.scrollViewDidScroll()` function in delegate for more intaractive with your collection or table view
+
 ## My projects
 
-Here I would like to offer you my other projects
+Here I would like to offer you my other projects.
 
 ### SPPermission
 Project [SPPermission](https://github.com/IvanVorobei/SPPermission) for managing permissions with the customizable visual effects. Beautiful dialog increases the chance of approval (which is important when we request notification). Simple control of this module saves you hours of development. You can start using project with just two lines of code and easy customization!
@@ -133,8 +149,8 @@ pod 'SparrowKit'
 ```
 
 ## License
-`SPStorkController` is released under the MIT license. Check LICENSE.md for details
+`SPStorkController` is released under the MIT license. Check `LICENSE.md` for details
 
 ## Contact
-If you need develop application or UI, write me to hello@ivanvorobei.by. I am develop design and ios apps. I am use `swift`. For request more functionality, you should create a new issue. 
-My apps in AppStore: [first account](https://itunes.apple.com/us/developer/polina-zubarik/id1434528595) & [second account](https://itunes.apple.com/us/developer/mikalai-varabei/id1435792103)
+If you have any requirements to develop any application or UI, write to me at hello@ivanvorobei.by. I am developing iOS apps and creates designs too. I use `swift` for developing projects. For requesting more functionality, you should create a new issue. 
+Here are my apps in AppStore: [first account](https://itunes.apple.com/us/developer/polina-zubarik/id1434528595) & [second account](https://itunes.apple.com/us/developer/mikalai-varabei/id1435792103)
