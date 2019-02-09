@@ -21,42 +21,37 @@
 
 import UIKit
 
-class SPInstagram {
+public class SPInstagram {
     
-    static var isSetApp: Bool {
-        if UIApplication.shared.canOpenURL(URL(string: "instagram://user?username=test")!) {
-            return true
-        } else {
-            return false
-        }
+    public static var isSetApp: Bool {
+        return UIApplication.shared.canOpenURL(URL(string: "instagram://user?username=test")!)
     }
     
-    static func openPost(id: String) {
+    public static func openPost(id: String) {
         let instagramHooks = "instagram://media?id=\(id)"
         let instagramUrl = URL(string: instagramHooks)
         let safariURL = URL(string: "instagram.com/\(id)")!
         if UIApplication.shared.canOpenURL(instagramUrl!) {
             UIApplication.shared.open(instagramUrl!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
-            SPOpener.Link.redirectToBrowserAndOpen(link: safariURL)
+            SPApp.open(link: safariURL.absoluteString, redirect: true)
         }
     }
     
-    static func openUser(username: String) {
+    public static func openUser(username: String) {
         let instagramHooks = "instagram://user?username=\(username)"
         let instagramUrl = URL(string: instagramHooks)
         let safariURL = URL(string: "https://instagram.com/\(username)")!
         if UIApplication.shared.canOpenURL(instagramUrl!) {
             UIApplication.shared.open(instagramUrl!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
-            SPOpener.Link.redirectToBrowserAndOpen(link: safariURL)
+            SPApp.open(link: safariURL.absoluteString, redirect: true)
         }
     }
     
     private init() {}
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

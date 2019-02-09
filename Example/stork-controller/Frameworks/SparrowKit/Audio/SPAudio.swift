@@ -24,7 +24,7 @@ import AVFoundation
 
 public struct SPAudio {
     
-    static func notStopBackgroundMusic() {
+    public static func notStopBackgroundMusic() {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.ambient)), mode: AVAudioSession.Mode.default)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -36,7 +36,6 @@ public struct SPAudio {
     private init() {}
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
 	return input.rawValue
 }

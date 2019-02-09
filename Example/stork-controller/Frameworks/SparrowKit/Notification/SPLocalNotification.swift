@@ -22,14 +22,14 @@
 import UIKit
 import UserNotifications
 
-struct SPLocalNotification {
+public struct SPLocalNotification {
     
-    static func add(from timeInterval: TimeInterval, body: String, title: String? = nil, identifier: String? = nil) {
+    public static func add(from timeInterval: TimeInterval, body: String, title: String? = nil, identifier: String? = nil) {
         
         let content = UNMutableNotificationContent()
         content.body = body
         content.title = title ?? ""
-        content.badge = NSNumber(value: SPBadge.number + 1)
+        content.badge = NSNumber(value: 1)
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
@@ -50,12 +50,12 @@ struct SPLocalNotification {
         }
     }
     
-    static func add(in date: Date, body: String, title: String? = nil, identifier: String? = nil) {
-        
+    public static func add(in date: Date, body: String, title: String? = nil, identifier: String? = nil) {
+
         let content = UNMutableNotificationContent()
         content.body = body
         content.title = title ?? ""
-        content.badge = NSNumber(value: SPBadge.number + 1)
+        content.badge = NSNumber(value: 1)
         content.sound = UNNotificationSound.default
         
         let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
@@ -77,7 +77,7 @@ struct SPLocalNotification {
         }
     }
     
-    static func remove(identifier: String) {
+    public static func remove(identifier: String) {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: [identifier])
     }

@@ -25,15 +25,14 @@ final class SPStorkPresentingAnimationController: NSObject, UIViewControllerAnim
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let presentedViewController = transitionContext.viewController(forKey: .to) else {
-            return
-        }
+        guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return }
         
         let containerView = transitionContext.containerView
         containerView.addSubview(presentedViewController.view)
-        presentedViewController.view.frame = CGRect(x: 0, y: containerView.bounds.height, width: containerView.bounds.width, height: containerView.bounds.height)
-        
+
         let finalFrameForPresentedView = transitionContext.finalFrame(for: presentedViewController)
+        presentedViewController.view.frame = finalFrameForPresentedView
+        presentedViewController.view.frame.origin.y = containerView.bounds.height
         
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),

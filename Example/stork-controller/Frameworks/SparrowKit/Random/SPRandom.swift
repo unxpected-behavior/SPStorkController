@@ -22,6 +22,7 @@
 import UIKit
 
 public extension String {
+    
     public static func random(count: Int) -> String {
         let strings = [
             "В доме кардинала от меня не было тайн; не раз видел я, как он усердно перелистывает старинные книги и жадно роется в пыли фамильных рукописей. Когда я как-то упрекнул его за бесполезные бессонные ночи, после которых он впадал в болезненное уныние, он взглянул на меня с горькой улыбкой и раскрыл передо мною историю города Рима. В этой книге, в двадцатой главе жизнеописания папы Александра Шестого, я прочел следующие строки, навсегда оставшиеся в моей памяти",
@@ -34,6 +35,7 @@ public extension String {
 }
 
 public extension Int {
+    
     public static func random(_ n: Int) -> Int {
         return Int(arc4random_uniform(UInt32(n)))
     }
@@ -44,6 +46,7 @@ public extension Int {
 }
 
 public extension Double {
+    
     public static func random() -> Double {
         return Double(arc4random()) / 0xFFFFFFFF
     }
@@ -54,6 +57,7 @@ public extension Double {
 }
 
 public extension Float {
+    
     public static func random() -> Float {
         return Float(arc4random()) / 0xFFFFFFFF
     }
@@ -64,6 +68,7 @@ public extension Float {
 }
 
 public extension CGFloat {
+    
     public static func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
@@ -74,8 +79,8 @@ public extension CGFloat {
 }
 
 public extension Collection {
-    /// Return a copy of `self` with its elements shuffled
-    func shuffle() -> [Iterator.Element] {
+
+    public func shuffle() -> [Iterator.Element] {
         var list = Array(self)
         list.shuffleInPlace()
         return list
@@ -84,15 +89,15 @@ public extension Collection {
 
 extension Collection where Index == Int {
     
-    func random() -> Iterator.Element? {
+    public func random() -> Iterator.Element? {
         return isEmpty ? nil : self[Int(arc4random_uniform(UInt32(endIndex)))]
     }
 }
 
 public extension MutableCollection where Index == Int {
-    /// Shuffle the elements of `self` in-place.
+
     mutating func shuffleInPlace() {
-        // empty and single-element collections don't shuffle
+
         if count < 2 { return }
         
         for i in startIndex ..< endIndex - 1 {

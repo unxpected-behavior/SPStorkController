@@ -21,17 +21,13 @@
 
 import UIKit
 
-class SPTwitter {
+public class SPTwitter {
     
-    static var isSetApp: Bool {
-        if UIApplication.shared.canOpenURL(URL(string: "twitter://post?message=test")!) {
-            return true
-        } else {
-            return false
-        }
+    public static var isSetApp: Bool {
+        return UIApplication.shared.canOpenURL(URL(string: "twitter://post?message=test")!)
     }
     
-    static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
+    public static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
         let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
         let urlOptional = URL(string: "twitter://post?message=\(urlStringEncoded ?? "")")
         if let url = urlOptional {
@@ -48,7 +44,6 @@ class SPTwitter {
     private init() {}
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

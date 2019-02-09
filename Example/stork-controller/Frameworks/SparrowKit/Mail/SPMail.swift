@@ -24,11 +24,11 @@ import MessageUI
 
 struct SPMail {
     
-    static var canSendEmail: Bool {
+    public static var canSendEmail: Bool {
         return MFMailComposeViewController.canSendMail()
     }
     
-    static func openMailApp(to email: String, subject: String? = nil, body: String? = nil) {
+    public static func openApp(to email: String, subject: String? = nil, body: String? = nil) {
         let parametrs = "mailto:\(email)?subject=\(subject ?? "")&body=\(body ?? "")".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         
         if parametrs != nil {
@@ -40,7 +40,7 @@ struct SPMail {
         }
     }
     
-    static func mailDialog(to email: String, subject: String? = nil, body: String? = nil, on viewController: UIViewController) {
+    public static func dialog(to email: String, subject: String? = nil, body: String? = nil, on viewController: UIViewController) {
         let mailVC = MFMailComposeViewController()
         mailVC.mailComposeDelegate = SPMailSingltone.sharedInstance
 
@@ -69,7 +69,6 @@ struct SPMail {
     private init() {}
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

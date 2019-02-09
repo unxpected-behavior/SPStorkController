@@ -21,7 +21,7 @@
 
 import UIKit
 
-class SPPlayCircleButton: UIButton {
+public class SPPlayCircleButton: UIButton {
     
     var audioState: AudioState = AudioState.play {
         didSet {
@@ -39,7 +39,7 @@ class SPPlayCircleButton: UIButton {
         }
     }
     
-    var iconColor = SPNativeStyleKit.Colors.white {
+    var iconColor = SPNativeColors.white {
         didSet {
             self.iconView.color = self.iconColor
         }
@@ -52,7 +52,7 @@ class SPPlayCircleButton: UIButton {
         self.addSubview(self.iconView)
         self.iconView.isUserInteractionEnabled = false
         self.setTitle("", for: .normal)
-        self.backgroundColor = SPNativeStyleKit.Colors.blue
+        self.backgroundColor = SPNativeColors.blue
         self.audioState = .play
     }
     
@@ -60,7 +60,7 @@ class SPPlayCircleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         self.iconView.setEqualsFrameFromBounds(self, withWidthFactor: 0.45, withHeightFactor: 0.45, withCentering: true)
         self.round()

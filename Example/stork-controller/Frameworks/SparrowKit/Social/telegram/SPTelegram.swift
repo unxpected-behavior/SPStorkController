@@ -21,17 +21,13 @@
 
 import UIKit
 
-class SPTelegram {
+public class SPTelegram {
     
-    static var isSetApp: Bool {
-        if UIApplication.shared.canOpenURL(URL(string: "tg://msg?text=test")!) {
-            return true
-        } else {
-            return false
-        }
+    public static var isSetApp: Bool {
+        return UIApplication.shared.canOpenURL(URL(string: "tg://msg?text=test")!)
     }
     
-    static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
+    public static func share(text: String, complection: @escaping (_ isOpened: Bool)->() = {_ in }) {
         let urlStringEncoded = text.addingPercentEncoding( withAllowedCharacters: .urlHostAllowed)
         let urlOptional = URL(string: "tg://msg?text=\(urlStringEncoded ?? "")")
         if let url = urlOptional {
@@ -45,24 +41,23 @@ class SPTelegram {
         }
     }
     
-    static func joinChannel(id: String) {
+    public static func joinChannel(id: String) {
         let url = "https://t.me/joinchat/\(id)"
-        SPOpener.Link.redirectToBrowserAndOpen(link: url)
+        SPApp.open(link: url, redirect: true)
     }
     
-    static func openBot(username: String) {
+    public static func openBot(username: String) {
         var username = username
         if username.first == "@" {
             username.removeFirst()
         }
         let url = "https://telegram.me/\(username)"
-        SPOpener.Link.redirectToBrowserAndOpen(link: url)
+        SPApp.open(link: url, redirect: true)
     }
     
     private init() {}
 }
 
-// Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

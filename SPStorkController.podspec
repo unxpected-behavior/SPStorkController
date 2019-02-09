@@ -1,13 +1,12 @@
 Pod::Spec.new do |s|
   s.name          = "SPStorkController"
-  s.version       = "1.2"
+  s.version       = "1.4.5"
   s.summary       = "Modal controller as mail or Apple music application"
   s.homepage      = "https://github.com/IvanVorobei/SPStorkController"
   s.source        = { :git => "https://github.com/IvanVorobei/SPStorkController.git", :tag => s.version }
   s.license       = { :type => "MIT", :file => "LICENSE" }
   
-  s.author        = { "Ivan Vorobei" => "ivanvorobei@icloud.com" }
-  s.social_media_url   = "http://t.me/ivanvorobei"
+  s.author        = { "Ivan Vorobei" => "hello@ivanvorobei.by" }
   
   s.swift_version = '4.2'
   s.platform      = :ios

@@ -27,13 +27,13 @@ extension UITableViewCell {
         return subviews.compactMap { $0 as? UIButton }.first
     }
     
-    var highlightedColor: UIColor? {
+    public var highlightedColor: UIColor? {
         get {
             return self.backgroundView?.backgroundColor
         }
         set {
             let backgroundView = UIView()
-            backgroundView.backgroundColor = SPNativeStyleKit.Colors.customGray
+            backgroundView.backgroundColor = SPNativeColors.customGray
             self.selectedBackgroundView = backgroundView
         }
     }

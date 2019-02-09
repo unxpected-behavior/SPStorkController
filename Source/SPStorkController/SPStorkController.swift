@@ -37,6 +37,7 @@ public struct SPStorkController {
             if let presentationController = controller.presentationController as? SPStorkPresentationController {
                 let translation = -(scrollView.contentOffset.y + scrollView.contentInset.top)
                 if translation >= 0 {
+                    if controller.isBeingPresented { return }
                     scrollView.subviews.forEach {
                         $0.transform = CGAffineTransform(translationX: 0, y: -translation)
                     }
@@ -71,13 +72,4 @@ public struct SPStorkController {
     }
     
     private init() {}
-}
-
-extension UIViewController {
-    
-    var isPresentedAsStork: Bool {
-        return transitioningDelegate is SPStorkTransitioningDelegate
-            && modalPresentationStyle == .custom
-            && presentingViewController != nil
-    }
 }
