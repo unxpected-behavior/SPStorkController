@@ -294,6 +294,17 @@ extension SPStorkPresentationController {
             break
         }
     }
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let gr = gestureRecognizer as? UIPanGestureRecognizer else { return true }
+        let v = gr.velocity(in: gr.view)
+        return v.y > 0
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        print("\(#function)")
+        return true
+    }
     
     func scrollViewDidScroll(_ translation: CGFloat) {
         if !self.workGester {
