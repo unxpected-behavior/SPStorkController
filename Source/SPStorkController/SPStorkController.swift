@@ -21,15 +21,6 @@
 
 import UIKit
 
-//    static public func scrollViewDidEndDragging(_ scrollView: UIScrollView) {
-//        if let controller = self.controller(for: scrollView) {
-//            let translation = -(scrollView.contentOffset.y + scrollView.contentInset.top)
-//            if translation*2 >= 120 {
-//                controller.dismiss(animated: true)
-//            }
-//        }
-//    }
-
 public struct SPStorkController {
     
     static public func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -64,7 +55,7 @@ public struct SPStorkController {
             }
         }
     }
-
+    
     static public func updatePresentingController(parent controller: UIViewController) {
         if let presentationController = controller.presentedViewController?.presentationController as? SPStorkPresentationController {
             presentationController.updatePresentingController()
