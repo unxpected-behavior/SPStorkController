@@ -28,7 +28,7 @@ class SPStorkPresentationController: UIPresentationController, UIGestureRecogniz
     var showIndicator: Bool = true
     var indicatorColor: UIColor = UIColor.init(red: 202/255, green: 201/255, blue: 207/255, alpha: 1)
     var customHeight: CGFloat? = nil
-    var translateForDismiss: CGFloat = 240
+    var translateForDismiss: CGFloat = 200
     
     var transitioningDelegate: SPStorkTransitioningDelegate?
     
@@ -294,7 +294,7 @@ extension SPStorkPresentationController {
             self.workGester = false
             let translation = gestureRecognizer.translation(in: presentedView).y
             if translation >= self.translateForDismiss {
-                presentedViewController.dismiss(animated: true, completion: nil)
+                self.presentedViewController.dismiss(animated: true, completion: nil)
             } else {
                 self.indicatorView.style = .arrow
                 UIView.animate(
@@ -336,6 +336,10 @@ extension SPStorkPresentationController {
         self.updateSnapshot()
     }
     
+    func setIndicator(style: SPStorkIndicatorView.Style) {
+        self.indicatorView.style = style
+    }
+    
     private func updatePresentedViewForTranslation(inVerticalDirection translation: CGFloat) {
         if self.startDismissing { return }
         
@@ -355,9 +359,10 @@ extension SPStorkPresentationController {
             
             self.presentedView?.transform = CGAffineTransform(translationX: 0, y: translationForModal)
             
-            let factor = 1 + (translationForModal / 6000)
-            self.snapshotView?.transform = CGAffineTransform.init(scaleX: factor, y: factor)
-            self.gradeView.alpha = self.alpha - ((factor - 1) * 15)
+            let scaleFactor = 1 + (translationForModal / 5000)
+            self.snapshotView?.transform = CGAffineTransform.init(scaleX: scaleFactor, y: scaleFactor)
+            let gradeFactor = 1 + (translationForModal / 7000)
+            self.gradeView.alpha = self.alpha - ((gradeFactor - 1) * 15)
         }
     }
 }
